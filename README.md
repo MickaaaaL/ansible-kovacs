@@ -14,7 +14,7 @@ vagrant up
 
 ![image](./test-01-ping.png)
 
-
+------------------------------------------------------
 # TEST-02 :
 ```
 cd formation-ansible/test-02/

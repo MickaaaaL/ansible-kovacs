@@ -1,5 +1,7 @@
 # ansible-kovacs
-Pour le contrôle continu de Kiki
+
+
+# Installer Ansible
 
 
 # TEST-01 :
@@ -66,6 +68,7 @@ vagrant destroy -f ubuntu
 
 ## Challenge-02 :
 
+#### Répétez le challenge précédent en configurant un dépôt PPA (Personal Package Archive) pour Ansible :
 ```
 vagrant up ubuntu
 vagrant ssh ubuntu
@@ -84,31 +87,56 @@ ansible --version
 
 ## Challenge-03 :
 
+* Démarrer la VM rocky :
 ```
 vagrant up rocky
-
+```
+Se Connecter à cette VM :
+```
 vagrant ssh rocky
-
+```
+* L'ajout du dépôt tiers EPEL 
+```
 sudo dnf install -y epel-release
-
+```
+* Activation du dépôt officiel Code Ready Builder :
+```
 sudo crb enable
-
+```
+* Installer PIP :
+```
 sudo dnf install -y python3-pip
-
+```
+* Initialisez l'environnement Virtualenv :
+```
 python3 -m venv ~/.venv/ansible
-
+```
+* Lancement de l'environnement Virtuel :
+```
 source ~/.venv/ansible/bin/activate
-
+```
+* Mettez à jour PIP :
+```
 (ansible) $ pip install --upgrade pip
-
+```
+* Installez Ansible :
+```
 (ansible) $ pip install ansible
-
+```
+* Vérifiez la version :
+```
 (ansible) $ ansible --version
-
+```
+* Quittez l'environnement Virtualenv :
+```
 (ansible) $ deactivate
-
+```
+* Quittez la VM :
+```
 exit 
-
+```
+* Détruisez la VM : 
+```
 vagrant destroy -f rocky
 ```
 

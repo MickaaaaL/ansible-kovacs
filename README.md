@@ -145,10 +145,69 @@ vagrant destroy -f rocky
 
 -------------------------------------------------------
 
-# ATELIER-02 : 
+# ATELIER-03 : 
+# Authentification sur les Target Hosts
 
+
+
+* Démarrer les VM : 
+```
+vagrant up
 ```
 
+* Connectez-vous au Control Host :
+```
+vagrant ssh control
+```
+
+* Vérification de ansible : 
+```
+type ansible
+```
+
+* Modification du fichier **/etc/hosts**
+``` # /etc/hosts
+192.168.56.10   control.sandbox.lan     controle
+192.168.56.20   target01.sandbox.lan    target01
+192.168.56.30   target02.sandox.lan     target02
+192.168.56.40   target03.sandbox.lan    target03
 
 ```
-![image](./atelier-02.png)
+* Tester la connectivité :
+```
+for HOST in target01 target02 target03; do ping -c 1 -q $HOST; done
+```
+
+* Collecter les clés SSH publiques des target : 
+```
+ssh-keyscan -t rsa target01 target02 target03 >> .ssh/known_hosts
+```
+![image](./atelier-03_collecte.png)
+
+* Génération de clé sur le Control
+```
+ssh-keygen
+```
+* Distribution de la clé publique sur les targets : 
+`password : vagrant`
+
+```
+ssh-copy-id vagrant@target01
+ssh-copy-id vagrant@target02
+ssh-copy-id vagrant@target03
+```
+
+* Premier test : 
+```
+ansible all -i target01,target02,target03 -u vagrant -m ping
+```
+![image](./atelier-03_ping_ansible.png)
+
+* Ping ansible : 
+``` 
+ansible all -i target01,target02,target03 -m ping
+``` 
+
+![image](./atelier-03_ping_ansible_all.png)
+
+* Supprimer toutes les VM

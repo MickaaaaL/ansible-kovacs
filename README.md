@@ -177,6 +177,7 @@ type ansible
 ```
 for HOST in target01 target02 target03; do ping -c 1 -q $HOST; done
 ```
+![image](./atelier-03_ping_target.png)
 
 * Collecter les clés SSH publiques des target : 
 ```
